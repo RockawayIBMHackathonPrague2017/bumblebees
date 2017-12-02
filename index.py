@@ -34,7 +34,7 @@ def get_init_test_data():
     return db.execute_query_limit({"CATEGORYTEXT": {"$regex": "Mobilní telefony a GPS"}}, limit=10)
 
 
-@app.route('/test/mobiles', methods=['GET'])
+@app.route('/test/pc', methods=['GET'])
 def get_init_test_data2():
     return db.execute_query_limit({"CATEGORYTEXT": {"$regex": "PC, kancelář"}}, limit=10)
 
