@@ -1,5 +1,6 @@
 #!/usr/bin/python
-# -*- coding: <encoding name> -*-
+# -*- coding: utf8 -*-
+
 from cloudant.query import Query
 import json
 import os

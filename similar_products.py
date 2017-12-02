@@ -1,5 +1,6 @@
 #!/usr/bin/python
-# -*- coding: <encoding name> -*-
+# -*- coding: utf8 -*-
+
 import json
 import db
 from distance import Distance

@@ -1,5 +1,6 @@
 #!/usr/bin/python
-# -*- coding: <encoding name> -*-
+# -*- coding: utf8 -*-
+
 import numpy as np
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler

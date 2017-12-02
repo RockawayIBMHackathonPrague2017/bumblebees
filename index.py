@@ -1,5 +1,6 @@
 #!/usr/bin/python
-# -*- coding: <encoding name> -*-
+# -*- coding: utf8 -*-
+
 from flask import Flask
 import atexit
 import cf_deployment_tracker
