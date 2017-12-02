@@ -1,6 +1,4 @@
-# Node.js Hello World Sample
-
-This application demonstrates a simple, reusable Node.js web application based on the Express framework.
+# only UI!!! backend in branch master
 
 ## Run the app locally
 
