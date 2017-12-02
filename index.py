@@ -76,18 +76,18 @@ def get_20_results():
     return get_all(20)
 
 
-@app.route('/filtered/<int:product_id>', methods=['GET'])
-def filtered_by_id(product_id):
-    product = execute_query({"ITEM_ID": product_id})
-    if product.length == 1:
-        return execute_query({"CATEGORYTEXT": product[0]["CATEGORYTEXT"]})
+@app.route('/filtered/<string:_id>', methods=['GET'])
+def filtered_by_id(_id):
+    product = json.loads(execute_query({"_id": _id}))
+    if len(product['docs']) == 1:
+        return execute_query({"CATEGORYTEXT": product['docs'][0]["CATEGORYTEXT"]})
     else:
-        return []
+        return json.dumps({"docs": []})
 
 
 @app.route('/filtered/category/<string:category>', methods=['GET'])
 def filtered_by_category(category):
-    return execute_query({"&CATEGORYTEXT": category})
+    return execute_query({"CATEGORYTEXT": {"$regex": category}})
 
 
 @app.route('/filtered/selector/<string:selector>', methods=['GET'])
