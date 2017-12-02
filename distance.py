@@ -47,8 +47,9 @@ class Distance():
         print('Distance obj: Fitting')
 
     def _drop_columns(self, columns):
+        [x.encode('utf-8') for x in columns]
         for item in columns:
-            self.df = self.df.drop(item, 1)
+            self.df = self.df.drop(item.decode('utf-8'), 1)
 
     def _remove_unsignificant_columns(self):
         for col in self.df:

@@ -10,7 +10,7 @@ def get_items(category):
     return json.loads(items)['docs']
 
 def get_similar_products(item):
-    category = item['CATEGORYTEXT']
+    category = item['CATEGORYTEXT'].decode('utf-8')
     item_id = item['ITEM_ID']
     for item in categories:
         if item in category:
