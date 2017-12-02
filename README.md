@@ -1,6 +1,4 @@
-# Python Hello World Sample
-
-This application demonstrates a simple, reusable Python web application.
+# only backend !!! UI in branch bumblebee-ui
 
 ## Run the app locally
 
