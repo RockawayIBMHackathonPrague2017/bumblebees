@@ -1,8 +1,8 @@
 applications:
 - path: .
-  memory: 4096M
+  memory: 256M
   instances: 1
   domain: mybluemix.net
-  name: bumblebee
-  host: bumblebee
+  name: bumblebee-ui
+  host: bumblebee-ui
   disk_quota: 1024M

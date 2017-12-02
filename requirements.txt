@@ -1,8 +1,0 @@
-cf_deployment_tracker
-cloudant
-flask
-pandas
-numpy
-sklearn
-scipy
-distance
