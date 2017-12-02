@@ -1,0 +1,179 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+/* line 5, ../../../../../../usr/local/lib/ruby/gems/2.3.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    font-size: 100%;
+    vertical-align: baseline;
+}
+
+/* line 22, ../../../../../../usr/local/lib/ruby/gems/2.3.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+html {
+    line-height: 1;
+}
+
+/* line 24, ../../../../../../usr/local/lib/ruby/gems/2.3.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+    list-style: none;
+}
+
+/* line 26, ../../../../../../usr/local/lib/ruby/gems/2.3.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* line 28, ../../../../../../usr/local/lib/ruby/gems/2.3.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+    text-align: left;
+    font-weight: normal;
+    vertical-align: middle;
+}
+
+/* line 30, ../../../../../../usr/local/lib/ruby/gems/2.3.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
+    quotes: none;
+}
+/* line 103, ../../../../../../usr/local/lib/ruby/gems/2.3.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+q:before, q:after, blockquote:before, blockquote:after {
+    content: "";
+    content: none;
+}
+
+/* line 32, ../../../../../../usr/local/lib/ruby/gems/2.3.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+a img {
+    border: none;
+}
+
+/* line 116, ../../../../../../usr/local/lib/ruby/gems/2.3.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+    display: block;
+}
+
+/* line 1, ../sass/base/_global.scss */
+* {
+    box-sizing: border-box;
+}
+
+/* line 5, ../sass/base/_global.scss */
+.btn-primary {
+    color: white;
+    border: none;
+    backround-image: linear-gradient(to top, #a90000, #c00 61%);
+    background-color: #C00C00;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+/* line 13, ../sass/base/_global.scss */
+.container {
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+/* line 19, ../sass/base/_global.scss */
+.recommended h2 {
+    font-family: Nunito, sans-serif;
+    margin: 2em 0;
+    font-size: 1.2em;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+/* line 1, ../sass/base/_section.scss */
+section {
+    display: flex;
+    flex-wrap: wrap;
+    flex-flow: row;
+    justify-content: space-around;
+}
+/* line 7, ../sass/base/_section.scss */
+section .product-card {
+    font-family: sans-serif;
+    padding: 2%;
+    flex-grow: 1;
+    flex-basis: 16%;
+    display: flex;
+    flex-direction: column;
+    transition: 0.5s all;
+}
+/* line 16, ../sass/base/_section.scss */
+section .product-card:hover {
+    box-shadow: 0px 0px 50px 5px rgba(194, 194, 194, 0.5);
+    transition-delay: 0s;
+}
+/* line 22, ../sass/base/_section.scss */
+section .product-image {
+    position: relative;
+    padding: 10px 0;
+    height: 260px;
+}
+/* line 27, ../sass/base/_section.scss */
+section .product-image img {
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+    margin: 0 auto;
+    position: relative;
+}
+/* line 37, ../sass/base/_section.scss */
+section .product-image .statuses .status {
+    position: absolute;
+    top: 5px;
+    background: #34ADCE;
+    color: white;
+    padding: 10px 25px;
+    border-radius: 4px;
+    z-index: 1;
+}
+/* line 49, ../sass/base/_section.scss */
+section .product-info {
+    border-top: 1px solid #99B6CD;
+    font-size: 0.9em;
+}
+/* line 53, ../sass/base/_section.scss */
+section .product-info > * {
+    padding: 10px;
+}
+/* line 57, ../sass/base/_section.scss */
+section .product-info .product-title {
+    font-family: Nunito, sans-serif;
+    margin-top: 10px;
+    font-size: 1.3em;
+}
+/* line 61, ../sass/base/_section.scss */
+section .product-info .product-title a {
+    color: black;
+}
+/* line 66, ../sass/base/_section.scss */
+section .product-info .product-price {
+    font-size: 1.3em;
+}
+/* line 70, ../sass/base/_section.scss */
+section .product-info .product-description {
+    line-height: 1.1em;
+    overflow: hidden;
+    height: 55px;
+}
+/* line 76, ../sass/base/_section.scss */
+section .product-info button {
+    margin-top: 10px;
+    width: 100%;
+}
