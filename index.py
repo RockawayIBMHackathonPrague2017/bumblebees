@@ -1,7 +1,6 @@
 from cloudant import Cloudant
 from cloudant.query import Query
-from cloudant.result import Result
-from flask import Flask, request, jsonify
+from flask import Flask
 import atexit
 import cf_deployment_tracker
 import os

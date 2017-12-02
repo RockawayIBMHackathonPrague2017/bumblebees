@@ -9,7 +9,7 @@ except ImportError:
 # Read port selected by the cloud for our application
 PORT = int(os.getenv('PORT', 8000))
 # Change current directory to avoid exposure of control files
-os.chdir('static')
+
 
 httpd = Server(("", PORT), Handler)
 try:
