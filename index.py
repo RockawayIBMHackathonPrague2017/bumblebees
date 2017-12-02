@@ -38,7 +38,7 @@ elif os.path.isfile(os.path.join(project_dir, 'vcap-local.json')):
         db = client.create_database(db_name, throw_on_exists=False)
 
 
-def find_relevant(selector):
+def execute_query(selector):
     findData = {
         "selector": selector,
         "fields": ["_id", "ITEM_ID" "PRODUCTNAME", "DESCRIPTION", "CATEGORYTEXT", "PRICE_VAT", "IMGURL", "URL",
@@ -79,21 +79,22 @@ def get_20_results():
 
 @app.route('/filtered/<int:product_id>', methods=['GET'])
 def filtered_by_id(product_id):
-    product = find_relevant({"ITEM_ID": product_id})
+    product = execute_query({"ITEM_ID": product_id})
     if product.length == 1:
-        return find_relevant({"CATEGORYTEXT": product[0]["CATEGORYTEXT"]})
+        return execute_query({"CATEGORYTEXT": product[0]["CATEGORYTEXT"]})
     else:
         return []
 
 
 @app.route('/filtered/category/<string:category>', methods=['GET'])
 def filtered_by_category(category):
-    return find_relevant({"&CATEGORYTEXT": category})
+    return execute_query({"&CATEGORYTEXT": category})
 
 
 @app.route('/filtered/selector/<string:selector>', methods=['GET'])
-def filtered_by_category(selector):
-    return find_relevant(json.loads(selector))
+def filtered_by_selector(selector):
+    # https://console.bluemix.net/docs/services/Cloudant/api/cloudant_query.html#query
+    return execute_query(json.loads(selector))
 
 
 @atexit.register
