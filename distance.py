@@ -47,7 +47,7 @@ class Distance():
         print('Distance obj: Fitting')
 
     def _drop_columns(self, columns):
-        [x.encode('utf-8') for x in columns]
+        [x.decode('utf-8') for x in columns]
         for item in columns:
             self.df = self.df.drop(item.decode('utf-8'), 1)
 
