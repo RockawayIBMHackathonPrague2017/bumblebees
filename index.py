@@ -1,6 +1,7 @@
 from cloudant import Cloudant
 from cloudant.query import Query
-from flask import Flask, render_template, request, jsonify
+from cloudant.result import Result
+from flask import Flask, request, jsonify
 import atexit
 import cf_deployment_tracker
 import os
@@ -41,24 +42,24 @@ elif os.path.isfile(os.path.join(project_dir, 'vcap-local.json')):
 def execute_query(selector):
     findData = {
         "selector": selector,
-        "fields": ["_id", "ITEM_ID" "PRODUCTNAME", "DESCRIPTION", "CATEGORYTEXT", "PRICE_VAT", "IMGURL", "URL",
+        "fields": ["_id", "ITEM_ID", "PRODUCTNAME", "DESCRIPTION", "CATEGORYTEXT", "PRICE_VAT", "IMGURL", "URL",
                    "PARAMS"],
     }
 
     query = Query(db, selector=findData["selector"], fields=findData["fields"])
     resp = query(skip=0, r=1)
-    return resp["docs"]
+    return json.dumps(resp)
 
 
 def get_all(limit):
     findData = {
-        "fields": ["_id", "ITEM_ID" "PRODUCTNAME", "DESCRIPTION", "CATEGORYTEXT", "PRICE_VAT", "IMGURL", "URL",
+        "fields": ["_id", "ITEM_ID", "PRODUCTNAME", "DESCRIPTION", "CATEGORYTEXT", "PRICE_VAT", "IMGURL", "URL",
                    "PARAMS"],
     }
 
-    query = Query(db, selector=findData["selector"], fields=findData["fields"])
-    resp = query(skip=0, limit=limit, r=1)
-    return resp["docs"]
+    query = Query(db, selector={"_id": {"$gt": 0}}, fields=findData["fields"], limit=limit)
+    resp = query(skip=0, r=1)
+    return json.dumps(resp)
 
 
 # On Bluemix, get the port number from the environment variable PORT
@@ -68,8 +69,7 @@ port = int(os.getenv('PORT', 8000))
 
 @app.route('/')
 def home():
-    # return render_template(os.path.join(project_dir, 'static\index.html'))
-    return render_template('index.html')
+    return "Nothing to see here"
 
 
 @app.route('/all', methods=['GET'])
