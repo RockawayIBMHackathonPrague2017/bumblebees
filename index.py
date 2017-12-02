@@ -43,41 +43,9 @@ port = int(os.getenv('PORT', 8000))
 def home():
     return render_template('index.html')
 
-# /* Endpoint to greet and add a new visitor to database.
-# * Send a POST request to localhost:8000/api/visitors with body
-# * {
-# *     "name": "Bob"
-# * }
-# */
-@app.route('/api/visitors', methods=['GET'])
+@app.route('/api', methods=['GET'])
 def get_visitor():
-    if client:
-        return jsonify(list(map(lambda doc: doc['name'], db)))
-    else:
-        print('No database')
-        return jsonify([])
-
-# /**
-#  * Endpoint to get a JSON array of all the visitors in the database
-#  * REST API example:
-#  * <code>
-#  * GET http://localhost:8000/api/visitors
-#  * </code>
-#  *
-#  * Response:
-#  * [ "Bob", "Jane" ]
-#  * @return An array of all the visitor names
-#  */
-@app.route('/api/visitors', methods=['POST'])
-def put_visitor():
-    user = request.json['name']
-    if client:
-        data = {'name':user}
-        db.create_document(data)
-        return 'Hello %s! I added you to the database.' % user
-    else:
-        print('No database')
-        return 'Hello %s!' % user
+    return jsonify({'hello': 'world'})
 
 @atexit.register
 def shutdown():
