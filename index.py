@@ -29,6 +29,21 @@ def get_20_results():
     return db.get_all(20)
 
 
+@app.route('/test/mobiles', methods=['GET'])
+def get_init_test_data():
+    return db.execute_query_limit({"CATEGORYTEXT": {"$regex": "Mobilní telefony a GPS"}}, limit=10)
+
+
+@app.route('/test/mobiles', methods=['GET'])
+def get_init_test_data2():
+    return db.execute_query_limit({"CATEGORYTEXT": {"$regex": "PC, kancelář"}}, limit=10)
+
+
+@app.route('/id/<string:_id>', methods=['GET'])
+def get_init_test_data3(_id):
+    return json.loads(db.execute_query({"_id": _id}))['docs']
+
+
 @app.route('/filtered/<string:_id>', methods=['GET'])
 def filtered_by_id(_id):
     product = json.loads(db.execute_query({"_id": _id}))['docs']
