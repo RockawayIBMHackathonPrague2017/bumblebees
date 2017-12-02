@@ -1,3 +1,5 @@
+#!/usr/bin/python
+# -*- coding: <encoding name> -*-
 from cloudant.query import Query
 import json
 import os

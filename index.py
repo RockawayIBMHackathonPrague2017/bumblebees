@@ -1,5 +1,5 @@
-from cloudant import Cloudant
-from cloudant.query import Query
+#!/usr/bin/python
+# -*- coding: <encoding name> -*-
 from flask import Flask
 import atexit
 import cf_deployment_tracker
@@ -57,8 +57,4 @@ def shutdown():
 
 
 if __name__ == '__main__':
-    import sys
-    reload(sys)  # Reload does the trick!
-    sys.setdefaultencoding('UTF8')
-
     app.run(host='0.0.0.0', port=port, debug=True)
