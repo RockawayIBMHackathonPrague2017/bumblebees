@@ -39,7 +39,7 @@ def get_color_products(items, original_item):
             return items, color_items
 
 def add_labels(items, original_item):
-    params = ['Interní paměť / ROM', 'Operační paměť / RAM', 'Kapacita baterie', 'Rozlišení fotoaparátu']
+    params = ['Interní paměť / ROM', 'Operační paměť / RAM', 'Kapacita baterie', 'Rozlišení fotoaparátu', 'Kapacita pevného disku', 'Paměť (RAM)']
     for item in items:
         item['LABELS'] = []
         if original_item['PRICE_VAT'] > item['PRICE_VAT']:
