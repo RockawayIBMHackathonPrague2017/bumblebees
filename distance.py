@@ -1,7 +1,9 @@
+#!/usr/bin/python
+# -*- coding: utf8 -*-
+
 import numpy as np
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
-from sklearn.preprocessing import StandardScaler
 from math import *
 from decimal import Decimal
 from scipy.spatial import distance
@@ -45,8 +47,9 @@ class Distance():
         print('Distance obj: Fitting')
 
     def _drop_columns(self, columns):
+        [x.decode('utf-8') for x in columns]
         for item in columns:
-            self.df = self.df.drop(item, 1)
+            self.df = self.df.drop(item.decode('utf-8'), 1)
 
     def _remove_unsignificant_columns(self):
         for col in self.df:

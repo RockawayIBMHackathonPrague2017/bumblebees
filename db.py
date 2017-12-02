@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding: utf8 -*-
+
 from cloudant.query import Query
 import json
 import os
@@ -29,6 +32,7 @@ elif os.path.isfile(os.path.join(project_dir, 'vcap-local.json')):
         client = Cloudant(user, password, url=url, connect=True)
         db = client.create_database(db_name, throw_on_exists=False)
 
+
 def execute_query(selector):
     findData = {
         "selector": selector,
@@ -37,6 +41,18 @@ def execute_query(selector):
     }
 
     query = Query(db, selector=findData["selector"], fields=findData["fields"])
+    resp = query(skip=0, r=1)
+    return json.dumps(resp)
+
+
+def execute_query_limit(selector, limit):
+    findData = {
+        "selector": selector,
+        "fields": ["_id", "ITEM_ID", "PRODUCTNAME", "DESCRIPTION", "CATEGORYTEXT", "PRICE_VAT", "IMGURL", "URL",
+                   "PARAMS"],
+    }
+
+    query = Query(db, selector=findData["selector"], fields=findData["fields"], limit=limit)
     resp = query(skip=0, r=1)
     return json.dumps(resp)
 
