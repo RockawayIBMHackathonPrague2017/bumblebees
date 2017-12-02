@@ -5,61 +5,13 @@ import atexit
 import cf_deployment_tracker
 import os
 import json
+import similar_products
+import db
 
 # Emit Bluemix deployment event
 cf_deployment_tracker.track()
 
 app = Flask(__name__)
-
-db_name = 'products'
-client = None
-db = None
-project_dir = os.path.dirname(os.path.realpath(__file__))
-
-if 'VCAP_SERVICES' in os.environ:
-    vcap = json.loads(os.getenv('VCAP_SERVICES'))
-    print('Found VCAP_SERVICES')
-    if 'cloudantNoSQLDB' in vcap:
-        creds = vcap['cloudantNoSQLDB'][0]['credentials']
-        user = creds['username']
-        password = creds['password']
-        url = 'https://' + creds['host']
-        client = Cloudant(user, password, url=url, connect=True)
-        db = client.create_database(db_name, throw_on_exists=False)
-elif os.path.isfile(os.path.join(project_dir, 'vcap-local.json')):
-    with open(os.path.join(project_dir, 'vcap-local.json')) as f:
-        vcap = json.load(f)
-        print('Found local VCAP_SERVICES')
-        creds = vcap['cloudantNoSQLDB'][0]['credentials']
-        user = creds['username']
-        password = creds['password']
-        url = 'https://' + creds['host']
-        client = Cloudant(user, password, url=url, connect=True)
-        db = client.create_database(db_name, throw_on_exists=False)
-
-
-def execute_query(selector):
-    findData = {
-        "selector": selector,
-        "fields": ["_id", "ITEM_ID", "PRODUCTNAME", "DESCRIPTION", "CATEGORYTEXT", "PRICE_VAT", "IMGURL", "URL",
-                   "PARAMS"],
-    }
-
-    query = Query(db, selector=findData["selector"], fields=findData["fields"])
-    resp = query(skip=0, r=1)
-    return json.dumps(resp)
-
-
-def get_all(limit):
-    findData = {
-        "fields": ["_id", "ITEM_ID", "PRODUCTNAME", "DESCRIPTION", "CATEGORYTEXT", "PRICE_VAT", "IMGURL", "URL",
-                   "PARAMS"],
-    }
-
-    query = Query(db, selector={"_id": {"$gt": 0}}, fields=findData["fields"], limit=limit)
-    resp = query(skip=0, r=1)
-    return json.dumps(resp)
-
 
 # On Bluemix, get the port number from the environment variable PORT
 # When running this app on the local machine, default the port to 8000
@@ -73,33 +25,35 @@ def home():
 
 @app.route('/all', methods=['GET'])
 def get_20_results():
-    return get_all(20)
+    return db.get_all(20)
 
 
 @app.route('/filtered/<string:_id>', methods=['GET'])
 def filtered_by_id(_id):
-    product = json.loads(execute_query({"_id": _id}))
-    if len(product['docs']) == 1:
-        return execute_query({"CATEGORYTEXT": product['docs'][0]["CATEGORYTEXT"]})
+    product = json.loads(db.execute_query({"_id": _id}))['docs']
+    if len(product) == 1:
+        return json.dumps({
+            'docs': list(similar_products.get_similar_products(product[0]))
+        }) #db.execute_query({"CATEGORYTEXT": product['docs'][0]["CATEGORYTEXT"]})
     else:
         return json.dumps({"docs": []})
 
 
 @app.route('/filtered/category/<string:category>', methods=['GET'])
 def filtered_by_category(category):
-    return execute_query({"CATEGORYTEXT": {"$regex": category}})
+    return db.execute_query({"CATEGORYTEXT": {"$regex": category}})
 
 
 @app.route('/filtered/selector/<string:selector>', methods=['GET'])
 def filtered_by_selector(selector):
     # https://console.bluemix.net/docs/services/Cloudant/api/cloudant_query.html#query
-    return execute_query(json.loads(selector))
+    return db.execute_query(json.loads(selector))
 
 
 @atexit.register
 def shutdown():
-    if client:
-        client.disconnect()
+    if db.client:
+        db.client.disconnect()
 
 
 if __name__ == '__main__':
