@@ -41,7 +41,7 @@ def get_init_test_data2():
 
 @app.route('/id/<string:_id>', methods=['GET'])
 def get_init_test_data3(_id):
-    return json.loads(db.execute_query({"_id": _id}))['docs']
+    return db.execute_query({"_id": _id})
 
 
 @app.route('/filtered/<string:_id>', methods=['GET'])
