@@ -29,6 +29,7 @@ elif os.path.isfile(os.path.join(project_dir, 'vcap-local.json')):
         client = Cloudant(user, password, url=url, connect=True)
         db = client.create_database(db_name, throw_on_exists=False)
 
+
 def execute_query(selector):
     findData = {
         "selector": selector,
