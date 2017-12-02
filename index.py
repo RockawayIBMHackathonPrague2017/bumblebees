@@ -78,12 +78,22 @@ def get_20_results():
 
 
 @app.route('/filtered/<int:product_id>', methods=['GET'])
-def get_50_results(product_id):
+def filtered_by_id(product_id):
     product = find_relevant({"ITEM_ID": product_id})
     if product.length == 1:
         return find_relevant({"CATEGORYTEXT": product[0]["CATEGORYTEXT"]})
     else:
         return []
+
+
+@app.route('/filtered/category/<string:category>', methods=['GET'])
+def filtered_by_category(category):
+    return find_relevant({"&CATEGORYTEXT": category})
+
+
+@app.route('/filtered/selector/<string:selector>', methods=['GET'])
+def filtered_by_category(selector):
+    return find_relevant(json.loads(selector))
 
 
 @atexit.register
