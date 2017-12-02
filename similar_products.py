@@ -12,7 +12,24 @@ def get_similar_products(item):
     for item in categories:
         if item in category:
             index = categories[item].ids.index(item_id)
-            return categories[item].get_items(index)
+            items = categories[item].get_items(index)
+            items, colors = get_color_products(items)
+            return {
+                'docs': list(items)[0:10],
+                'colors': list(colors)
+            }
+    return {'docs': []}
+
+def get_color_products(items):
+    id = items.pop(0)['ITEM_ID'][:-3]
+    color_items = []
+    for item in items:
+        print(id, item['ITEM_ID'][:-3])
+        if id == item['ITEM_ID'][:-3]:
+            color_items.append(id.pop(0))
+        else:
+            return items, color_items
+
 
 categories = {
     'Mobilní telefony a GPS': Distance(get_items('Mobilní telefony a GPS'), drop=['Výška','Hloubka','Distribuce']),

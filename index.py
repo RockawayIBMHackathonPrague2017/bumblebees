@@ -32,9 +32,7 @@ def get_20_results():
 def filtered_by_id(_id):
     product = json.loads(db.execute_query({"_id": _id}))['docs']
     if len(product) == 1:
-        return json.dumps({
-            'docs': list(similar_products.get_similar_products(product[0]))[0:10]
-        }) #db.execute_query({"CATEGORYTEXT": product['docs'][0]["CATEGORYTEXT"]})
+        return json.dumps(similar_products.get_similar_products(product[0]))
     else:
         return json.dumps({"docs": []})
 
