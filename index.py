@@ -31,12 +31,12 @@ def get_20_results():
 
 @app.route('/test/mobiles', methods=['GET'])
 def get_init_test_data():
-    return db.execute_query_limit({"CATEGORYTEXT": {"$regex": "Mobilní telefony a GPS"}}, limit=10)
+    return db.execute_query_limit({"CATEGORYTEXT": {"$regex": "Mobilní telefony a GPS"}}, limit=20, skip=5)
 
 
 @app.route('/test/pc', methods=['GET'])
 def get_init_test_data2():
-    return db.execute_query_limit({"CATEGORYTEXT": {"$regex": "PC, kancelář"}}, limit=10)
+    return db.execute_query_limit({"CATEGORYTEXT": {"$regex": "PC, kancelář"}}, limit=20, skip=5)
 
 
 @app.route('/id/<string:_id>', methods=['GET'])
