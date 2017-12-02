@@ -57,4 +57,8 @@ def shutdown():
 
 
 if __name__ == '__main__':
+    import sys
+    reload(sys)  # Reload does the trick!
+    sys.setdefaultencoding('UTF8')
+
     app.run(host='0.0.0.0', port=port, debug=True)
