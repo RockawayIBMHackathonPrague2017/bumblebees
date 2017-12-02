@@ -45,15 +45,15 @@ def execute_query(selector):
     return json.dumps(resp)
 
 
-def execute_query_limit(selector, limit):
+def execute_query_limit(selector, limit, skip):
     findData = {
         "selector": selector,
         "fields": ["_id", "ITEM_ID", "PRODUCTNAME", "DESCRIPTION", "CATEGORYTEXT", "PRICE_VAT", "IMGURL", "URL",
                    "PARAMS"],
     }
 
-    query = Query(db, selector=findData["selector"], fields=findData["fields"], limit=limit)
-    resp = query(skip=0, r=1)
+    query = Query(db, selector=findData["selector"], fields=findData["fields"], limit=limit, skip=skip)
+    resp = query(r=1)
     return json.dumps(resp)
 
 
